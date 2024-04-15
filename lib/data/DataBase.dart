@@ -1,4 +1,5 @@
 import 'package:shopping/data/Customer.dart';
+import 'package:shopping/data/DebitCard.dart';
 import 'package:shopping/data/Product.dart';
 import 'package:shopping/data/Category.dart';
 import 'package:shopping/data/SubCategory.dart';
@@ -6,6 +7,8 @@ import 'package:shopping/data/SubCategory.dart';
 import 'Card.dart';
 
 class DataBase {
+  static bool isInitialized = false;
+  static List<DebitCard> debitCards = [];
   static List<Product> products = [];
   static List<Category> categories = [];
   static List<SubCategory> subCategories = [];
@@ -18,7 +21,12 @@ class DataBase {
   static Card card = Card(cardProducts: [], userId: customer.id);
 
   static void init() {
-    products.add(Product(id: 1, name: "P1", price: 100, status: "Avail", image: "https://", categoryId: 1, subCategoryId: 1));
+    if (isInitialized) return;
+
+    debitCards.add(DebitCard(id: 1, promoCode: "3325D", type: "V", value: 150.5));
+    debitCards.add(DebitCard(id: 2, promoCode: "74H9N", type: "P", value: 15.7));
+
+    products.add(Product(id: 1, name: "P1-Sherif-Salah-El-dien112 product", price: 100, status: "Avail", image: "https://", categoryId: 1, subCategoryId: 1));
     products.add(Product(id: 2, name: "P2", price: 99, status: "Avail", image: "https://", categoryId: 1, subCategoryId: 1));
     products.add(Product(id: 3, name: "P3", price: 198, status: "Avail", image: "https://", categoryId: 1, subCategoryId: 3));
     products.add(Product(id: 4, name: "P4", price: 188, status: "Avail", image: "https://", categoryId: 1, subCategoryId: 3));
@@ -49,5 +57,7 @@ class DataBase {
     subCategories.add(SubCategory(id: 4, name: "bags"));
     subCategories.add(SubCategory(id: 5, name: "accessories"));
     subCategories.add(SubCategory(id: 6, name: "shoes"));
+
+    isInitialized = true;
   }
 }

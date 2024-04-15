@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopping/constants.dart';
+import 'package:shopping/custom_widgets/web_mobile_size.dart';
 import 'package:shopping/data/CardProduct.dart';
 import 'package:shopping/data/DataBase.dart';
 import 'package:shopping/data/Product.dart';
@@ -50,10 +51,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    double padding = 0.0;
-    if (width > height) padding = width / 2 - height / 4;
 
     int productId = (ModalRoute.of(context)?.settings.arguments ?? 0) as int;
     Product product = Product(id: 0, name: "", price: 0, status: "", image: "", categoryId: 1, subCategoryId: 1);
@@ -61,8 +59,7 @@ class _ProductScreenState extends State<ProductScreen> {
       if (p.id == productId) product = p;
     }
 
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: padding),
+    return WebMobileSize(
       child: Scaffold(
         backgroundColor: kMainColor,
         appBar: AppBar(
@@ -238,7 +235,6 @@ class _ProductScreenState extends State<ProductScreen> {
                                               CardProduct(product: product, quantity: _productNum)
                                           );
                                           setState(() => _productNum = 1);
-                                          print(DataBase.card);
                                           Navigator.of(context).pop();
                                         },
                                         child: const Text('Yes'),
@@ -248,13 +244,19 @@ class _ProductScreenState extends State<ProductScreen> {
                                 },
                               );
                             },
-                            child: const Text(
-                              'Add to card 🛒',
-                              style: TextStyle(
-                                  fontFamily: 'Pacifico',
-                                  fontSize: 14,
-                                  color: whiteTextColor
-                              ),
+                            child: const Row(
+                              children: [
+                                Text(
+                                  'Add to card 🛒',
+                                  style: TextStyle(
+                                      fontFamily: 'Pacifico',
+                                      fontSize: 14,
+                                      color: whiteTextColor
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                Icon(Icons.shopping_cart)
+                              ],
                             )
                         ),
                       ),
