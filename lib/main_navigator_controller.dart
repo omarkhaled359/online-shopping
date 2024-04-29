@@ -72,7 +72,17 @@ class MainNavigatorController {
                 pushHomeStack(homeProductScreen);
                 arguments[productScreenArgument] = productId;
                 setStatAction();
-              }
+              },
+              onCategoryTabAction: (categoryId) {
+                popHomeStack();
+                pushHomeStack(homeCategoryScreen);
+                arguments[categoryScreenArgument] = categoryId;
+                setStatAction();
+              },
+              onAllTabAction: () {
+                popHomeStack();
+                setStatAction();
+              },
           );
           case homeProductScreen: return const ProductScreenWidget();
           default: return HomeScreenWidget(

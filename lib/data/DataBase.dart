@@ -7,6 +7,13 @@ import 'package:shopping/data/SubCategory.dart';
 import 'Card.dart';
 
 class DataBase {
+  static String imgLink = "https://th.bing.com/th/id/OIP.YAXlTjvtEKchdMVc5laZhwHaE8?rs=1&pid=ImgDetMain";
+
+  static String imgManLink = "https://th.bing.com/th/id/OIP.K1ISx-9IRbQlDioApXONTQAAAA?rs=1&pid=ImgDetMain";
+  static String imgWomanLink = "https://th.bing.com/th/id/OIP.RNpTpm3_QV9XLFiTjc1deQAAAA?rs=1&pid=ImgDetMain";
+  static String imgKidsLink = "https://th.bing.com/th/id/OIP.T8EAz0aixHZnQ-nVK-EKHQHaFj?rs=1&pid=ImgDetMain";
+  static String imgMakeUpLink = "https://th.bing.com/th/id/OIP.bqOVRab_TmG8xqoM_ErIEQHaHa?rs=1&pid=ImgDetMain";
+
   static bool isInitialized = false;
   static List<DebitCard> debitCards = [];
   static List<Product> products = [];
@@ -46,10 +53,10 @@ class DataBase {
     products.add(Product(id: 18, name: "P18", price: 756, status: "Avail", image: "https://", categoryId: 3, subCategoryId: 5));
     products.add(Product(id: 19, name: "P19", price: 122, status: "Avail", image: "https://", categoryId: 4, subCategoryId: 5));
 
-    categories.add(Category(id: 1, name: "Man", subCategoriesIds: [1, 3, 6]));
-    categories.add(Category(id: 2, name: "Woman", subCategoriesIds: [2, 3, 6]));
-    categories.add(Category(id: 3, name: "Children", subCategoriesIds: [1, 3, 4, 5]));
-    categories.add(Category(id: 4, name: "Shops", subCategoriesIds: [1, 3, 4, 5]));
+    categories.add(Category(id: 1, name: "Man", image: imgManLink , subCategoriesIds: [1, 3, 6]));
+    categories.add(Category(id: 2, name: "Woman", image: imgWomanLink , subCategoriesIds: [2, 3, 6]));
+    categories.add(Category(id: 3, name: "Children", image: imgKidsLink , subCategoriesIds: [1, 3, 4, 5]));
+    categories.add(Category(id: 4, name: "Make Up", image: imgMakeUpLink , subCategoriesIds: [1, 3, 4, 5]));
 
     subCategories.add(SubCategory(id: 1, name: "shirts"));
     subCategories.add(SubCategory(id: 2, name: "dress"));

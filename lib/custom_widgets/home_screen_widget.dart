@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:shopping/constants.dart';
 import 'package:shopping/custom_widgets/web_mobile_size.dart';
 import 'package:shopping/main_navigator_controller.dart';
@@ -7,6 +8,7 @@ import 'package:shopping/main_navigator_controller.dart';
 import '../data/Category.dart';
 import '../data/DataBase.dart';
 import '../screens/category_screen.dart';
+import '../top_taps_controller.dart';
 
 class HomeScreenWidget extends StatefulWidget {
   const HomeScreenWidget({super.key, required this.onNavigateAction});
@@ -22,12 +24,34 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
   final Function onNavigateAction;
 
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    TopTapsController.categoryTabIndex = 0;
+    TopTapsController.subCategoryTabIndex = 0;
+  }
+
+  void scrollToIndex(int index) {
+    _scrollController.animateTo(
+      index * 116.0, // Width of Container (100) + margin (8)
+      duration: Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
 
-    const int len = 4;
-    final List<String> tabTitles = ['Tab 1', 'Tab 2', 'Tab 3'];
+    final List<Category> categoryTabTitles = [Category(id: -1, name: "All", image: DataBase.imgLink, subCategoriesIds: [])];
+    for (Category category in DataBase.categories) {
+      categoryTabTitles.add(category);
+    }
+    for (Category category in DataBase.categories) {
+      categoryTabTitles.add(category);
+    }
 
     return StreamBuilder<List<Category>>(
       stream: Stream.fromIterable([DataBase.categories]),
@@ -37,17 +61,39 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           double itemWidth = (currentScreenWidth - 40) / 3;
           return Column(
             children: [
-              // const DefaultTabController(
-              //   length: tabTitles.length,
-              //   child: TabBar(
-              //     tabs: [
-              //       Text("data"),
-              //       Text("data"),
-              //       Text("data"),
-              //       Text("data"),
-              //     ],
-              //   ),
-              // ),
+              SizedBox(
+                height: 30,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: categoryTabTitles.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Center(
+                        child: GestureDetector(
+                            onTap: () {
+                              TopTapsController.categoryTabIndex = index;
+                              TopTapsController.subCategoryTabIndex = 0;
+                              if (categoryTabTitles[index].id != -1) {
+                                onNavigateAction(categoryTabTitles[index].id);
+                              }
+                            },
+                            child: Text(
+                              categoryTabTitles[index].name,
+                              style: TextStyle(
+                                fontFamily: 'Pacifico',
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
+                                color: (TopTapsController.categoryTabIndex == index) ? redTextColor : blackTextColor,
+                              ),
+                            )
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+
               Expanded(
                 child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -58,8 +104,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                   ),
                   itemBuilder: (context, index) => GestureDetector(
                     onTap: () {
+                      TopTapsController.categoryTabIndex = index + 1;
+                      TopTapsController.subCategoryTabIndex = 0;
                       onNavigateAction(snapshot.data?[index].id);
-                      // Navigator.pushNamed(context, CategoryScreen.id, arguments: snapshot.data?[index].id);
                     },
                     child: Container(
                       // color: Colors.red,
@@ -67,7 +114,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                         children: [
                           ClipOval(
                             child: Image.network(
-                              "https://th.bing.com/th/id/OIP.YAXlTjvtEKchdMVc5laZhwHaE8?rs=1&pid=ImgDetMain",
+                              snapshot.data![index].image,
                               width: itemWidth,
                               height: itemWidth,
                               fit: BoxFit.cover,

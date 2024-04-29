@@ -4,12 +4,14 @@ import 'product.dart';
 class Category {
   final int id;
   final String name;
+  final String image;
   final List<int> subCategoriesIds;
 
 Category({
     required this.id,
     required this.name,
-  required this.subCategoriesIds,
+    required this.image,
+    required this.subCategoriesIds,
   });
 
   // Factory constructor for creating Card from a Map
@@ -17,6 +19,7 @@ Category({
     return Category(
       id: map['id'],
       name: map['name'],
+      image: map['image'],
       subCategoriesIds: List<int>.from(map['subCategoriesIds']?.map((x) => x as int) ?? []),
     );
   }
@@ -26,12 +29,13 @@ Category({
     return {
       'id': id,
       'name': name,
+      'image': image,
       'subCategoriesIds': subCategoriesIds,
     };
   }
 
   @override
   String toString() {
-    return 'Category(id: $id, name $name, subCategoriesIds $subCategoriesIds)';
+    return 'Category(id: $id, name $name, image $image, subCategoriesIds $subCategoriesIds)';
   }
 }

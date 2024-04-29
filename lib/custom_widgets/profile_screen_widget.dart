@@ -29,6 +29,61 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
       children: [
         SizedBox(
           width: double.infinity,
+          height: 180,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              Image.network(
+                DataBase.imgLink,
+                width: 140,
+                height: 180,
+                fit: BoxFit.cover,
+                loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                  if (loadingProgress == null) {
+                    return child;
+                  } else {
+                    return CircularProgressIndicator(
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                          : null,
+                    );
+                  }
+                },
+                errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                  return const Text('Failed to load image');
+                },
+              ),
+              const SizedBox(width: 12),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 8),
+                  Text(
+                    DataBase.customer.name,
+                    style: const TextStyle(
+                        fontFamily: 'Pacifico',
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: blackTextColor
+                    ),
+                  ),
+                  Text(
+                    DataBase.customer.email,
+                    style: const TextStyle(
+                        fontFamily: 'Pacifico',
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: greyTextColor
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 24),
+        SizedBox(
+          width: double.infinity,
           child: TextButton(
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(20),

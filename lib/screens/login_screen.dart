@@ -9,6 +9,8 @@ import 'package:shopping/provider/ModelHub.dart';
 import 'package:shopping/screens/home_screen.dart';
 import 'package:shopping/screens/sign_up_screen.dart';
 
+import 'my_home_page.dart';
+
 class LoginScreen extends StatelessWidget{
   LoginScreen({super.key});
 
