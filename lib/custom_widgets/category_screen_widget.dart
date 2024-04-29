@@ -69,9 +69,6 @@ class _CategoryScreenWidgetState extends State<CategoryScreenWidget> {
     for (Category category in DataBase.categories) {
       categoryTabTitles.add(category);
     }
-    for (Category category in DataBase.categories) {
-      categoryTabTitles.add(category);
-    }
 
     List<Product> currentProducts = [];
     List<SubCategory> subCategories = [];

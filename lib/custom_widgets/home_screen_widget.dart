@@ -49,9 +49,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     for (Category category in DataBase.categories) {
       categoryTabTitles.add(category);
     }
-    for (Category category in DataBase.categories) {
-      categoryTabTitles.add(category);
-    }
 
     return StreamBuilder<List<Category>>(
       stream: Stream.fromIterable([DataBase.categories]),
