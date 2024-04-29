@@ -33,13 +33,13 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     TopTapsController.subCategoryTabIndex = 0;
   }
 
-  void scrollToIndex(int index) {
-    _scrollController.animateTo(
-      index * 116.0, // Width of Container (100) + margin (8)
-      duration: Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
-    );
-  }
+  // void scrollToIndex(int index) {
+  //   _scrollController.animateTo(
+  //     index * 116.0, // Width of Container (100) + margin (8)
+  //     duration: Duration(milliseconds: 500),
+  //     curve: Curves.easeInOut,
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {

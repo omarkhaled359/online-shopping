@@ -76,7 +76,7 @@ class _ProductScreenWidgetState extends State<ProductScreenWidget> {
           child: Column(
             children: [
               Image.network(
-                "https://th.bing.com/th/id/OIP.YAXlTjvtEKchdMVc5laZhwHaE8?rs=1&pid=ImgDetMain",
+                product.image,
                 height: height * 0.5,
                 fit: BoxFit.cover,
                 loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {

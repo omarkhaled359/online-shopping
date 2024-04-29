@@ -46,20 +46,20 @@ class _CategoryScreenWidgetState extends State<CategoryScreenWidget> {
   @override
   void initState() {
     super.initState();
-    scrollToIndex(TopTapsController.categoryTabIndex);
+    // scrollToIndex(TopTapsController.categoryTabIndex);
   }
 
   void refresh() {
     setState(() {});
   }
 
-  void scrollToIndex(int index) {
-    _scrollController.animateTo(
-      index * 116.0, // Width of Container (100) + margin (8)
-      duration: Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
-    );
-  }
+  // void scrollToIndex(int index) {
+  //   _scrollController.animateTo(
+  //     index * 116.0, // Width of Container (100) + margin (8)
+  //     duration: Duration(milliseconds: 500),
+  //     curve: Curves.easeInOut,
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +99,7 @@ class _CategoryScreenWidgetState extends State<CategoryScreenWidget> {
     }
 
     // TODO here
-    scrollToIndex(6);
+    // scrollToIndex(6);
 
     return StreamBuilder<List<Product>>(
       stream: Stream.fromIterable([currentProducts]),
@@ -162,7 +162,7 @@ class _CategoryScreenWidgetState extends State<CategoryScreenWidget> {
                               child: Column(
                                 children: [
                                   Image.network(
-                                    DataBase.imgLink,
+                                    subCategories[index].image,
                                     width: 80,
                                     height: 80,
                                     fit: BoxFit.cover,
@@ -303,7 +303,7 @@ class _CategoryScreenWidgetState extends State<CategoryScreenWidget> {
                               child: Column(
                                 children: [
                                   Image.network(
-                                    DataBase.imgLink,
+                                    subCategories[index].image,
                                     width: 80,
                                     height: 80,
                                     fit: BoxFit.cover,
@@ -386,7 +386,7 @@ class _CategoryScreenWidgetState extends State<CategoryScreenWidget> {
                         child: Column(
                           children: [
                             Image.network(
-                              DataBase.imgLink,
+                              snapshot.data![index].image,
                               width: itemWidth,
                               height: itemWidth,
                               fit: BoxFit.cover,

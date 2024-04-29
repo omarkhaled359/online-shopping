@@ -81,7 +81,7 @@ class _CardScreenWidgetState extends State<CardScreenWidget> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Image.network(
-                                  "https://th.bing.com/th/id/OIP.YAXlTjvtEKchdMVc5laZhwHaE8?rs=1&pid=ImgDetMain",
+                                  snapshot.data![index].product.image,
                                   width: itemWidth,
                                   height: itemWidth,
                                   fit: BoxFit.cover,

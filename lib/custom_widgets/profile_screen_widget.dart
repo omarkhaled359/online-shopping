@@ -34,7 +34,7 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
             scrollDirection: Axis.horizontal,
             children: [
               Image.network(
-                DataBase.imgLink,
+                DataBase.imgProfileLink,
                 width: 140,
                 height: 180,
                 fit: BoxFit.cover,

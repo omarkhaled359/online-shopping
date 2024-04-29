@@ -1,13 +1,12 @@
-import 'package:shopping/data/CardProduct.dart';
-import 'product.dart';
-
 class SubCategory {
   final int id;
   final String name;
+  final String image;
 
   SubCategory({
     required this.id,
     required this.name,
+    required this.image,
   });
 
   // Factory constructor for creating Card from a Map
@@ -15,6 +14,7 @@ class SubCategory {
     return SubCategory(
       id: map['id'],
       name: map['name'],
+      image: map['image'],
     );
   }
 
@@ -23,11 +23,12 @@ class SubCategory {
     return {
       'id': id,
       'name': name,
+      'image': image,
     };
   }
 
   @override
   String toString() {
-    return 'Category(id: $id, name $name)';
+    return 'Category(id: $id, name $name, image $image)';
   }
 }
